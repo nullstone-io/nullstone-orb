@@ -1,12 +1,15 @@
 description: >
   Install Nullstone CLI automatically in your jobs or commands.
+
 usage:
   version: 2.1
+
   orbs:
     nullstone: nullstone/nullstone@x.y.z
+
   jobs:
     deploy:
+      docker:
+        - image: cimg/go
       steps:
-        - checkout
         - nullstone/install
-    workflows: null
