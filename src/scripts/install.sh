@@ -12,8 +12,8 @@ install() {
 
   os="linux"
   arch="amd64"
-  if [ -n "$(uname | grep "Darwin")" ]; then
-      platform="darwin"
+  if uname | grep -q "Darwin"; then
+      os="darwin"
   fi
 
   download_url="https://github.com/${repo}/releases/download/${version}/nullstone_${raw_version}_${os}_${arch}.tar.gz"
