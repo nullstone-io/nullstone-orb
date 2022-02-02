@@ -8,7 +8,7 @@ get_latest_version() {
 
 Install() {
   version=$1
-  raw_version=$(echo "${version}" | sed 's/v//') # Drop first character 'v'
+  raw_version=${version//v/} # Drop first character 'v'
   os=$(go env GOOS)
   arch=$(go env GOARCH)
   if [ "$(go env GOOS)" = "windows" ]; then
