@@ -1,0 +1,12 @@
+description: >
+  Install Nullstone CLI automatically in your jobs or commands.
+usage:
+  version: 2.1
+  orbs:
+    nullstone: nullstone/nullstone@x.y.z
+  jobs:
+    deploy:
+      steps:
+        - checkout
+        - nullstone/install
+    workflows: null

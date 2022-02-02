@@ -1,0 +1,7 @@
+description: >
+  Install the Nullstone CLI
+parameters:
+steps:
+  - run:
+      name: Install CLI
+      command: <<include(scripts/install.sh)>>
