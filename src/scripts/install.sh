@@ -3,7 +3,9 @@
 repo="nullstone-io/nullstone"
 
 get_latest_version() {
-  curl --silent "https://github.com/${repo}/releases/latest" | sed 's#.*tag/\(.*\)\".*#\1#'
+  curl --silent -H "Accept: application/vnd.github.v3+json" \
+    "https://api.github.com/repos/${repo}/releases/latest" | \
+    grep tag_name | sed 's/\s*\"tag_name\": \"\([^"]*\)",/\1/'
 }
 
 install() {
