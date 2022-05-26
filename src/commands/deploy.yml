@@ -20,23 +20,10 @@ parameters:
       Specify version to deploy.
       If not specified, the CLI will use the commit sha from the containing repository.
 steps:
-  - when:
-      condition: << parameters.version >>
-      steps:
-        - run:
-            name: Deploy via Nullstone
-            environment:
-              NULLSTONE_APP: << parameters.app >>
-              NULLSTONE_ENV: << parameters.env >>
-            command: |
-              nullstone deploy --version=<< parameters.version >>
-  - unless:
-      condition: << parameters.version >>
-      steps:
-        - run:
-            name: Deploy via Nullstone
-            environment:
-              NULLSTONE_APP: << parameters.app >>
-              NULLSTONE_ENV: << parameters.env >>
-            command: |
-              nullstone deploy
+  - run:
+      name: Deploy via Nullstone
+      environment:
+        PARAM_APP: << parameters.app >>
+        PARAM_ENV: << parameters.env >>
+        PARAM_VERSION: << parameters.version >>
+      command: <<include(scripts/deploy.sh)>>
