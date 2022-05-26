@@ -1,0 +1,41 @@
+description: >
+  Deploy Nullstone app
+parameters:
+  app:
+    type: string
+    default: ""
+    description: |
+      The Nullstone app name to deploy.
+      If not specified, will look for NULLSTONE_APP env var.
+  env:
+    type: string
+    default: ""
+    description: |
+      The Nullstone environment name to deploy.
+      If not specified, will look for NULLSTONE_ENV env var.
+  version:
+    type: string
+    default: ""
+    description: |
+      Specify version to deploy.
+      If not specified, the CLI will use the commit sha from the containing repository.
+steps:
+  - when:
+      condition: << parameters.version >>
+      steps:
+        - run:
+            name: Deploy via Nullstone
+            command: |
+              nullstone deploy \
+                --app=<< parameters.app >> \
+                --env=<< parameters.env >> \
+                --version=<< parameters.version >>
+  - unless:
+      condition: << parameters.version >>
+      steps:
+        - run:
+            name: Deploy via Nullstone
+            command: |
+              nullstone deploy \
+                --app=<< parameters.app >> \
+                --env=<< parameters.env >>

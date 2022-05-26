@@ -1,0 +1,46 @@
+description: >
+  Push Nullstone artifact
+parameters:
+  source:
+    type: string
+    description: "The source artifact to push (e.g. docker image name+tag, directory, zip file)"
+  app:
+    type: string
+    default: ""
+    description: |
+      The Nullstone app name to push the artifact.
+      If not specified, will look for NULLSTONE_APP env var.
+  env:
+    type: string
+    default: ""
+    description: |
+      The Nullstone environment name to push the artifact.
+      If not specified, will look for NULLSTONE_ENV env var.
+  version:
+    type: string
+    default: ""
+    description: |
+      Specify version to tag the Nullstone artifact.
+      If not specified, the CLI will use the commit sha from the containing repository.
+steps:
+  - when:
+      condition: << parameters.version >>
+      steps:
+        - run:
+            name: Push artifact via Nullstone
+            command: |
+              nullstone push \
+                --app=<< parameters.app >> \
+                --env=<< parameters.env >> \
+                --source=<< parameters.source >> \
+                --version=<< parameters.version >>
+  - unless:
+      condition: << parameters.version >>
+      steps:
+        - run:
+            name: Push artifact via Nullstone
+            command: |
+              nullstone push \
+                --app=<< parameters.app >> \
+                --env=<< parameters.env >> \
+                --source=<< parameters.source >>
