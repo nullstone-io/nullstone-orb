@@ -28,19 +28,19 @@ steps:
       steps:
         - run:
             name: Push artifact via Nullstone
+            environment:
+              NULLSTONE_APP: << parameters.app >>
+              NULLSTONE_ENV: << parameters.env >>
             command: |
-              nullstone push \
-                --app=<< parameters.app >> \
-                --env=<< parameters.env >> \
-                --source=<< parameters.source >> \
+              nullstone push --source=<< parameters.source >> \
                 --version=<< parameters.version >>
   - unless:
       condition: << parameters.version >>
       steps:
         - run:
             name: Push artifact via Nullstone
+            environment:
+              NULLSTONE_APP: << parameters.app >>
+              NULLSTONE_ENV: << parameters.env >>
             command: |
-              nullstone push \
-                --app=<< parameters.app >> \
-                --env=<< parameters.env >> \
-                --source=<< parameters.source >>
+              nullstone push --source=<< parameters.source >>

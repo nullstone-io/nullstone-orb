@@ -25,17 +25,18 @@ steps:
       steps:
         - run:
             name: Deploy via Nullstone
+            environment:
+              NULLSTONE_APP: << parameters.app >>
+              NULLSTONE_ENV: << parameters.env >>
             command: |
-              nullstone deploy \
-                --app=<< parameters.app >> \
-                --env=<< parameters.env >> \
-                --version=<< parameters.version >>
+              nullstone deploy --version=<< parameters.version >>
   - unless:
       condition: << parameters.version >>
       steps:
         - run:
             name: Deploy via Nullstone
+            environment:
+              NULLSTONE_APP: << parameters.app >>
+              NULLSTONE_ENV: << parameters.env >>
             command: |
-              nullstone deploy \
-                --app=<< parameters.app >> \
-                --env=<< parameters.env >>
+              nullstone deploy
