@@ -4,4 +4,4 @@ parameters:
 steps:
   - run:
       name: Install CLI
-      command: <<include(scripts/install.sh)>>
+      command: <<include(scripts/run-install.sh)>>
