@@ -1,4 +1,5 @@
 #!/bin/bash -e
 
-source "$(dirname ${BASH_SOURCE[0]})/deploy.sh"
+# shellcheck source=/dev/null
+source "$(dirname "${BASH_SOURCE[0]}")/deploy.sh"
 Deploy
