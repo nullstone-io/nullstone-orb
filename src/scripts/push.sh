@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
 
 Push() {
     CMD="nullstone push --source=${PARAM_SOURCE}"
