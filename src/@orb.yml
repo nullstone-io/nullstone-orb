@@ -1,13 +1,15 @@
 version: 2.1
 
 description: >
-  Install Nullstone CLI and run commands
+  This orb contains automation macros for installing the Nullstone CLI.
+  This orb contains built-in commands for common operations on the CLI.
+  Additionally, you can use a `run` step to execute a CLI command directly.
 # What will your orb allow users to accomplish?
 # Descriptions should be short, simple, and informative.
 
 # This information will be displayed in the orb registry and is not mandatory.
 display:
-  home_url: "https://nullstone.io/docs"
+  home_url: "https://docs.nullstone.io/"
   source_url: "https://www.github.com/nullstone-io/nullstone-orb"
 
 # If your orb requires other orbs, you can import them like this. Otherwise remove the "orbs" stanza.
