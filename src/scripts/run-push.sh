@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
-pushd "$(dirname "${BASH_SOURCE[0]}")"
-source ./push.sh
-popd
+SCRIPT_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+source "${SCRIPT_DIR}/push.sh"
 
 Push

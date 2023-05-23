@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
-pushd "$(dirname "${BASH_SOURCE[0]}")"
-source ./deploy.sh
-popd
+SCRIPT_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+source "${SCRIPT_DIR}/deploy.sh"
 
 Deploy
