@@ -34,4 +34,5 @@ steps:
         PARAM_APP: << parameters.app >>
         PARAM_ENV: << parameters.env >>
         PARAM_VERSION: << parameters.version >>
+      working_directory: scripts
       command: <<include(scripts/run-deploy.sh)>>
