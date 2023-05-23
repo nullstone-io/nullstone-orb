@@ -20,6 +20,7 @@ workflows:
           filters: *filters
       - shellcheck/check:
           filters: *filters
+          external_sources: true
       - bats/run:
           filters: *filters
           path: ./src/tests
