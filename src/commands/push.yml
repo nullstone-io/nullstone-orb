@@ -38,4 +38,5 @@ steps:
         PARAM_ENV: << parameters.env >>
         PARAM_SOURCE: << parameters.source >>
         PARAM_VERSION: << parameters.version >>
+      working_directory: scripts
       command: <<include(scripts/run-push.sh)>>
