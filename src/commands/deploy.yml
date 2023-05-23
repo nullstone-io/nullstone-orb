@@ -21,7 +21,7 @@ parameters:
       If not specified, the CLI will use the commit sha from the containing repository.
 steps:
   - run:
-      name: Deploy via Nullstone
+      name: "Deploy <<parameters.app>> via Nullstone"
       environment:
         PARAM_APP: << parameters.app >>
         PARAM_ENV: << parameters.env >>
