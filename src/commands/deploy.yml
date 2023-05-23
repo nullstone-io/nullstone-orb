@@ -1,6 +1,13 @@
 description: >
   Deploy Nullstone app
 parameters:
+  stack:
+    type: string
+    default: ""
+    description: |
+      The Nullstone stack name where the application resides.
+      If not specified, Nullstone will attempt to find the application by name.
+      This will fail if left empty and there are multiple apps with the same name.
   app:
     type: string
     default: ""
@@ -21,8 +28,9 @@ parameters:
       If not specified, the CLI will use the commit sha from the containing repository.
 steps:
   - run:
-      name: "Deploy <<parameters.app>> via Nullstone"
+      name: "Deploy <<parameters.app>> to <<parameters.env>> via Nullstone"
       environment:
+        PARAM_STACK: << parameters.stack >>
         PARAM_APP: << parameters.app >>
         PARAM_ENV: << parameters.env >>
         PARAM_VERSION: << parameters.version >>

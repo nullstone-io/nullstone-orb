@@ -4,6 +4,13 @@ parameters:
   source:
     type: string
     description: "The source artifact to push (e.g. docker image name+tag, directory, zip file)"
+  stack:
+    type: string
+    default: ""
+    description: |
+      The Nullstone stack name where the application resides.
+      If not specified, Nullstone will attempt to find the application by name.
+      This will fail if left empty and there are multiple apps with the same name.
   app:
     type: string
     default: ""
@@ -24,8 +31,9 @@ parameters:
       If not specified, the CLI will use the commit sha from the containing repository.
 steps:
   - run:
-      name: "Push <<parameters.app>> artifact via Nullstone"
+      name: "Push <<parameters.app>> artifact to <<parameters.env>> via Nullstone"
       environment:
+        PARAM_STACK: << parameters.stack >>
         PARAM_APP: << parameters.app >>
         PARAM_ENV: << parameters.env >>
         PARAM_SOURCE: << parameters.source >>
