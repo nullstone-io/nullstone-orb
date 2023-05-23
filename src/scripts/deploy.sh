@@ -2,6 +2,9 @@
 
 Deploy() {
     CMD="nullstone deploy"
+    if [ -n "${PARAM_STACK}" ]; then
+        CMD="${CMD} --stack=${PARAM_STACK}"
+    fi
     if [ -n "${PARAM_APP}" ]; then
         CMD="${CMD} --app=${PARAM_APP}"
     fi
