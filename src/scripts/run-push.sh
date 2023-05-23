@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
-# shellcheck source=/dev/null
-source "$(dirname ${BASH_SOURCE[0]})/push.sh"
+pushd "$(dirname "${BASH_SOURCE[0]}")"
+source ./push.sh
+popd
+
 Push
