@@ -1,4 +1,4 @@
-#!/bin/bash -e
+  #!/bin/bash -e
 
 repo="nullstone-io/nullstone"
 
@@ -30,17 +30,20 @@ install() {
 }
 
 Install() {
-  latest_version=$(get_latest_version)
+  desired_version="${PARAM_VERSION}"
+  if [ -z "${desired_version}" ]; then
+    desired_version=$(get_latest_version)
+  fi
   if [ ! "$(which nullstone)" ]; then
-    install "${latest_version}"
+    install "${desired_version}"
   else
     cur_version="v$(nullstone --version | cut -d ' ' -f3)"
-    if [ "${latest_version}" = "${cur_version}" ]; then
+    if [ "${desired_version}" = "${cur_version}" ]; then
       echo "Nullstone CLI is already installed, skipping installation."
       nullstone --version
     else
-      echo "Nullstone CLI is out-of-date, installing latest..."
-      install "${latest_version}"
+      echo "Nullstone CLI is out-of-date, installing ${desired_version}..."
+      install "${desired_version}"
     fi
   fi
 }

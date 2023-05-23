@@ -1,7 +1,13 @@
 description: >
   Install the Nullstone CLI
+parameters:
+  version:
+    type: string
+    default: ""
 steps:
   - run:
       name: Install CLI
+      environment:
+        PARAM_VERSION: << parameters.version >>
       working_directory: scripts
       command: <<include(scripts/run-install.sh)>>
