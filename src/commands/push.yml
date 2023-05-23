@@ -24,7 +24,7 @@ parameters:
       If not specified, the CLI will use the commit sha from the containing repository.
 steps:
   - run:
-      name: Push artifact via Nullstone
+      name: "Push <<parameters.app>> artifact via Nullstone"
       environment:
         PARAM_APP: << parameters.app >>
         PARAM_ENV: << parameters.env >>
