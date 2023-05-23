@@ -1,4 +1,4 @@
 #!/bin/bash -e
 
-source "./src/scripts/deploy.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/deploy.sh"
 Deploy
