@@ -1,4 +1,5 @@
 #!/bin/bash -e
 
-source "./src/scripts/install.sh"
+# shellcheck source=./src/scripts/install.sh
+source "$(dirname "${BASH_SOURCE[0]}")/install.sh"
 Install
