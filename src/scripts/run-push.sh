@@ -1,5 +1,4 @@
 #!/bin/bash -e
 
-# shellcheck source=/dev/null
-source "$(dirname "${BASH_SOURCE[0]}")/push.sh"
+source "./src/scripts/push.sh"
 Push
