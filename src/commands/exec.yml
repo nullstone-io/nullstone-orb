@@ -1,0 +1,37 @@
+description: >
+  Execute Nullstone task application
+parameters:
+  stack:
+    type: string
+    default: ""
+    description: |
+      The Nullstone stack name where the application resides.
+      If not specified, Nullstone will attempt to find the application by name.
+      This will fail if left empty and there are multiple apps with the same name.
+  app:
+    type: string
+    default: ""
+    description: |
+      The Nullstone app name to deploy.
+      If not specified, will look for NULLSTONE_APP env var.
+  env:
+    type: string
+    default: ""
+    description: |
+      The Nullstone environment name to deploy.
+      If not specified, will look for NULLSTONE_ENV env var.
+  command:
+    type: string
+    default: ""
+    description: |
+      Provide a specific command to run in your application container.
+      If not specified, the default command for your Docker image will be run.
+steps:
+  - run:
+      name: "Execute a task for <<parameters.app>> in <<parameters.env>> via Nullstone"
+      environment:
+        PARAM_STACK: << parameters.stack >>
+        PARAM_APP: << parameters.app >>
+        PARAM_ENV: << parameters.env >>
+        PARAM_COMMAND: << parameters.command >>
+      command: <<include(scripts/run-exec.sh)>>
