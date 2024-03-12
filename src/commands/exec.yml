@@ -26,6 +26,15 @@ parameters:
     description: |
       Provide a specific command to run in your application container.
       If not specified, the default command for your Docker image will be run.
+  timeout:
+    type: string
+    default: "10m"
+    description: |
+      The maximum time to wait for the command to complete.
+      If the command takes longer than this, the step will fail.
+      This is useful for long-running commands like database migrations.
+      This value will be passed along to CircleCI so provide a value in the format specified by CircleCI.
+      https://support.circleci.com/hc/en-us/articles/360007188574-Build-has-Hit-Timeout-Limit
 steps:
   - run:
       name: "Execute a task for <<parameters.app>> in <<parameters.env>> via Nullstone"
@@ -35,3 +44,4 @@ steps:
         PARAM_ENV: << parameters.env >>
         PARAM_COMMAND: << parameters.command >>
       command: <<include(scripts/run-exec.sh)>>
+      no_output_timeout: << parameters.timeout >>
