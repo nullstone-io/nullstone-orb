@@ -3,7 +3,7 @@
 repo="nullstone-io/nullstone"
 
 get_latest_version() {
-  if [ -n "${GITHUB_TOKEN}" ];
+  if [ -n "${GITHUB_TOKEN}" ]; then
     curl --silent -H "Accept: application/vnd.github.v3+json" \
       -H "Authorization: Bearer ${GITHUB_TOKEN}" \
       "https://api.github.com/repos/${repo}/releases/latest" | \
