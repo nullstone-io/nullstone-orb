@@ -4,11 +4,13 @@ repo="nullstone-io/nullstone"
 
 get_latest_version() {
   if [ -n "${GITHUB_TOKEN}" ]; then
+    echo "Discovering latest Nullstone CLI version via authenticated GitHub API..."
     curl --silent -H "Accept: application/vnd.github.v3+json" \
       -H "Authorization: Bearer ${GITHUB_TOKEN}" \
       "https://api.github.com/repos/${repo}/releases/latest" | \
       grep tag_name | sed 's/\s*\"tag_name\": \"\([^"]*\)",/\1/'
   else
+    echo "Discovering latest Nullstone CLI version via unauthenticated GitHub API..."
     curl --silent -H "Accept: application/vnd.github.v3+json" \
       "https://api.github.com/repos/${repo}/releases/latest" | \
       grep tag_name | sed 's/\s*\"tag_name\": \"\([^"]*\)",/\1/'
