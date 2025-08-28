@@ -3,16 +3,12 @@
 repo="nullstone-io/nullstone"
 
 get_latest_version() {
-  args=(--silent -H "Accept: application/vnd.github.v3+json")
-  [ -n "$GITHUB_TOKEN" ] && args+=(-H "Authorization: Bearer $GITHUB_TOKEN")
-
-  curl "${args[@]}" "https://api.github.com/repos/${repo}/releases/latest" | \
-    grep tag_name | sed 's/\s*\"tag_name\": \"\([^"]*\)",/\1/'
+  curl -sIL -o /dev/null -w '%{url_effective}' https://github.com/nullstone-io/nullstone/releases/latest | awk -F/ '{print $NF}'
 }
 
 install() {
-  version=$1
-  raw_version=${version//v/} # Drop first character 'v'
+  version_tag=$1
+  version=${version_tag//v/} # Drop first character 'v'
 
   os="linux"
   arch="amd64"
@@ -20,7 +16,7 @@ install() {
       os="darwin"
   fi
 
-  download_url="https://github.com/${repo}/releases/download/${version}/nullstone_${raw_version}_${os}_${arch}.tar.gz"
+  download_url="https://github.com/${repo}/releases/download/${version_tag}/nullstone_${version}_${os}_${arch}.tar.gz"
   echo "Downloading Nullstone CLI from '${download_url}'..."
   curl -o nullstone.tar.gz -sSL "${download_url}"
   tar -xvf nullstone.tar.gz
@@ -34,11 +30,6 @@ install() {
 Install() {
   desired_version="${PARAM_VERSION}"
   if [ -z "${desired_version}" ]; then
-    if [ -n "$GITHUB_TOKEN" ]; then
-      echo "Discovering latest Nullstone CLI version via authenticated GitHub API..."
-    else
-      echo "Discovering latest Nullstone CLI version via unauthenticated GitHub API..."
-    fi
     desired_version=$(get_latest_version)
   fi
   if [ ! "$(which nullstone)" ]; then
