@@ -3,8 +3,10 @@
 repo="nullstone-io/nullstone"
 
 get_latest_version() {
-  curl --silent -H "Accept: application/vnd.github.v3+json" \
-    "https://api.github.com/repos/${repo}/releases/latest" | \
+  args=(--silent -H "Accept: application/vnd.github.v3+json")
+  [ -n "$GITHUB_TOKEN" ] && args+=(-H "Authorization: Bearer $GITHUB_TOKEN")
+
+  curl "${args[@]}" "https://api.github.com/repos/${repo}/releases/latest" | \
     grep tag_name | sed 's/\s*\"tag_name\": \"\([^"]*\)",/\1/'
 }
 
@@ -32,6 +34,11 @@ install() {
 Install() {
   desired_version="${PARAM_VERSION}"
   if [ -z "${desired_version}" ]; then
+    if [ -n "$GITHUB_TOKEN" ]; then
+      echo "Discovering latest Nullstone CLI version via authenticated GitHub API..."
+    else
+      echo "Discovering latest Nullstone CLI version via unauthenticated GitHub API..."
+    fi
     desired_version=$(get_latest_version)
   fi
   if [ ! "$(which nullstone)" ]; then

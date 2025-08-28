@@ -4,6 +4,7 @@ description: >
   This orb contains automation macros for installing the Nullstone CLI.
   This orb contains built-in commands for common operations on the CLI.
   Additionally, you can use a `run` step to execute a CLI command directly.
+  NOTE: To avoid GitHub API rate limits, add a GitHub token as GITHUB_TOKEN environment variable.
 # What will your orb allow users to accomplish?
 # Descriptions should be short, simple, and informative.
 
