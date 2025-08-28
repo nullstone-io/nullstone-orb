@@ -9,5 +9,4 @@ steps:
       name: Install CLI
       environment:
         PARAM_VERSION: << parameters.version >>
-        GITHUB_TOKEN: ${GITHUB_TOKEN}
       command: <<include(scripts/run-install.sh)>>
